@@ -8,10 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        Text("Hello, world!")
-            .padding()
-    }
+	@StateObject var data = Activities()
+
+	var body: some View {
+		NavigationView {
+			List(data.activities) { activity in
+				NavigationLink {
+					Text("Detail view")
+				} label: {
+					HStack {
+						Text(activity.title)
+						Spacer()
+
+						Text(String(activity.completionCount))
+					}
+				}
+			}
+			.navigationTitle("Habito")
+		}
+	}
 }
 
 struct ContentView_Previews: PreviewProvider {
